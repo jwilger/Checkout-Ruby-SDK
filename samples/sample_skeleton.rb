@@ -1,4 +1,3 @@
-require 'braintreehttp'
 require_relative '../lib/lib'
 
 module SampleSkeleton

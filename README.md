@@ -2,7 +2,7 @@
 
 ![Home Image](homepage.jpg)
 
-__Welcome to PayPal Python SDK__. This repository contains PayPal's Python SDK and samples for REST API.
+__Welcome to PayPal Ruby SDK__. This repository contains PayPal's Ruby SDK and samples for REST API.
 
 This is a part of the next major PayPal SDK. It includes a simplified interface to only provide simple model objects and blueprints for HTTP calls. This repo currently contains functionality for PayPal Checkout APIs which includes Orders V2 and Payments V2.
 
@@ -23,15 +23,15 @@ This is a part of the next major PayPal SDK. It includes a simplified interface 
 Get client ID and client secret by going to https://developer.paypal.com/developer/applications and generating a REST API app. Get <b>Client ID</b> and <b>Secret</b> from there.
 
 ```ruby
-from checkoutsdk.core import PayPalHttpClient, SandboxEnvironment
+require 'paypal-checkout-sdk'
 
 
 # Creating Access Token for Sandbox
 client_id = "AVNCVvV9oQ7qee5O8OW4LSngEeU1dI7lJAGCk91E_bjrXF2LXB2TK2ICXQuGtpcYSqs4mz1BMNQWuso1"
 client_secret = "EDQzd81k-1z2thZw6typSPOTEjxC_QbJh6IithFQuXdRFc7BjVht5rQapPiTaFt5RC-HCa1ir6mi-H5l"
 # Creating an environment
-environment = SandboxEnvironment(client_id=client_id, client_secret=client_secret)
-client = PayPalHttpClient(environment)
+environment = CheckoutSdk::SandboxEnvironment.new(client_id, client_secret)
+client = CheckoutSdk::PayPalHttpClient.new(self.environment)
 ```
 
 ## Examples
@@ -39,38 +39,35 @@ client = PayPalHttpClient(environment)
 ### Creating an Order
 
 #### Code: 
-```python
-from checkoutsdk.orders import OrdersCreateRequest
-# Construct a request object and set desired parameters
-# Here, OrdersCreateRequest() creates a POST request to /v2/checkout/orders
-request = OrdersCreateRequest()
-request.request_body = ({
-                            "intent": "CAPTURE",
-                            "purchase_units": [
-                                {
-                                    "amount": {
-                                        "currency_code": "USD",
-                                        "value": "100.00"
-                                    }
-                                }
-                            ]
-                        })
+```ruby
 
-try:
+# Construct a request object and set desired parameters
+# Here, OrdersCreateRequest::new creates a POST request to /v2/checkout/orders
+request = CheckoutSdk::Orders::OrdersCreateRequest::new
+request.request_body({
+                        intent: "CAPTURE",
+                        purchase_units: [
+                            {
+                                amount: {
+                                    currency_code: "USD",
+                                    value: "100.00"
+                                }
+                            }
+                        ]
+                      })
+
+begin
     # Call API with your client and get a response for your call
     response = client.execute(request) 
     
     # If call returns body in response, you can get the deserialized version from the result attribute of the response
     order = response.result
-    print response.result
-except IOError as ioe:
-    if isinstance(ioe, HttpError):
-        # Something went wrong server-side
-        print ioe.status_code
-        print ioe.headers["debug_id"]
-    else:
-        # Something went wrong client side
-        print ioe
+    puts order
+rescue BraintreeHttp::HttpError => ioe
+    # Something went wrong server-side
+    puts ioe.status_code
+    puts ioe.headers["debug_id"]
+end
 ```
 
 #### Example Output:
@@ -90,26 +87,23 @@ Gross Amount: USD 230.00
 After approving order above using `approve` link
 
 #### Code:
-```python
-from checkoutsdk.orders import OrdersCaptureRequest
-# Here, OrdersCaptureRequest() creates a POST request to /v2/checkout/orders
+```ruby
+# Here, OrdersCaptureRequest::new() creates a POST request to /v2/checkout/orders
 # order.id gives the orderId of the order created above
-request = OrdersCaptureRequest(order.id)
+request = CheckoutSdk::Orders::OrdersCaptureRequest::new(order.id)
 
-try:
+begin
     # Call API with your client and get a response for your call
-    response = client.execute(request)
+    response = client.execute(request) 
     
     # If call returns body in response, you can get the deserialized version from the result attribute of the response
     order = response.result
-except IOError as ioe:
-    if isinstance(ioe, HttpError):
-        # Something went wrong server-side
-        print ioe.status_code
-        print ioe.headers["debug_id"]
-    else:
-        # Something went wrong client side
-        print ioe
+    puts order
+rescue BraintreeHttp::HttpError => ioe
+    # Something went wrong server-side
+    puts ioe.status_code
+    puts ioe.headers["debug_id"]
+end
 ```
 
 #### Example Output:
@@ -126,6 +120,6 @@ Buyer:
 ```
 ## Samples
 
-You can start off by trying out [creating and capturing an order](/sample/CaptureIntentExamples/run_all.py)
+You can start off by trying out [creating and capturing an order](/samples/capture_intent_examples/run_all.rb)
 
-To try out different samples for both create and authorize intent check [this link](/sample)
+To try out different samples for both create and authorize intent check [this link](/samples)
