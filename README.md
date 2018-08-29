@@ -118,6 +118,17 @@ Buyer:
 	Name: test buyer
 	Phone Number: 408-411-2134
 ```
+
+## Running tests
+
+To run integration tests using your client id and secret, clone this repository and run the following command:
+```sh
+$ bundle install
+$ rspec spec
+```
+
+*NOTE*: This SDK is still in beta, is subject to change, and should not be used in production.
+
 ## Samples
 
 You can start off by trying out [creating and capturing an order](/samples/capture_intent_examples/run_all.rb)
