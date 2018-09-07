@@ -38,6 +38,10 @@ module PayPal
 
     def _add_headers(request)
       request.headers["Accept-Encoding"] = "gzip"
+      request.headers["sdk_name"] = "Checkout SDK"
+      request.headers["sdk_version"] = VERSION
+      request.headers["sdk_tech_stack"] = "Python" + RUBY_VERSION
+      request.headers["api_integration_type"] = "PAYPALSDK"
     end
 
     def _is_auth_request(request)

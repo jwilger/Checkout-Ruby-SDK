@@ -31,7 +31,7 @@ module Samples
                             },
                             shipping: {
                                 currency_code: 'USD',
-                                value: '20.00'
+                                value: '30.00'
                             },
                             handling: {
                                 currency_code: 'USD',
@@ -40,10 +40,6 @@ module Samples
                             tax_total: {
                                 currency_code: 'USD',
                                 value: '20.00'
-                            },
-                            gift_wrap: {
-                                currency_code: 'USD',
-                                value: '10.00'
                             },
                             shipping_discount: {
                                 currency_code: 'USD',
@@ -116,7 +112,7 @@ module Samples
             # this could also be called as link.rel or link.href but as method is a reserved keyword for ruby avoid calling link.method
             puts "\t#{link["rel"]}: #{link["href"]}\tCall Type: #{link["method"]}"
           end
-          puts "Gross Amount: #{response.result.gross_amount.currency_code} #{response.result.gross_amount.value}"
+          puts "Gross Amount: #{response.result.purchase_units[0].amount.currency_code} #{response.result.purchase_units[0].amount.value}"
         end
         return response
       end

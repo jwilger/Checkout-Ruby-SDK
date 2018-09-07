@@ -6,7 +6,11 @@ module Samples
       def capture_order (order_id, debug=false)
         request = OrdersCaptureRequest::new(order_id)
         request.prefer("return=representation")
-        response = SampleSkeleton::exec(request)
+        begin
+          response = SampleSkeleton::exec(request)
+        rescue => e
+          puts e.result
+        end
         if debug
           puts "Status Code: #{response.status_code}"
           puts "Status: #{response.result.status}"
@@ -19,7 +23,7 @@ module Samples
           end
           puts "Buyer:"
           buyer = response.result.payer
-          puts "\tEmail Address: #{buyer.email_address}\n\tName: #{buyer.name.given_name} #{buyer.name.surname}\n\tPhone Number: #{buyer.phone.phone_number.national_number}"
+          puts "\tEmail Address: #{buyer.email_address}\n\tName: #{buyer.name.full_name}\n\tPhone Number: #{buyer.phone.phone_number.national_number}"
           end
         return response
       end
@@ -28,5 +32,5 @@ module Samples
 end
 
 if __FILE__ == $0
-  CaptureOrder::new::capture_order('6VX76138TN979942L')
+  Samples::CaptureIntentExamples::CaptureOrder::new::capture_order('4C5113878W7268015', true)
 end

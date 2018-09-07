@@ -4,8 +4,9 @@ require 'json'
 require 'ostruct'
 
 include CheckoutSdk::Orders
+
 module Samples
-  class GetOrder
+  class PatchOrder
     def get_order(order_id)
       request = OrdersGetRequest::new(order_id)
       response = SampleSkeleton::exec(request)
