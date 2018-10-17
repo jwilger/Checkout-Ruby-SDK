@@ -1,8 +1,13 @@
-require_relative '../sample_skeleton'
+require_relative '../paypal_client'
 include CheckoutSdk::Orders
+
 module Samples
   module CaptureIntentExamples
     class CreateOrder
+
+      # This is the sample function which can be used to create an order. It uses the
+      # sample JSON body to create an new Order.
+      # The Intent in the request body should be set as "CAPTURE" for capture intent flow.
       def create_order (debug=false)
         body = {
             intent: 'CAPTURE',
@@ -81,11 +86,10 @@ module Samples
                     ],
                     shipping: {
                         method: 'United States Postal Service',
+                        name: {
+                            full_name: 'John Doe'
+                        },
                         address: {
-                            name: {
-                                give_name: 'John',
-                                surname: 'Doe'
-                            },
                             address_line_1: '123 Townsend St',
                             address_line_2: 'Floor 6',
                             admin_area_2: 'San Francisco',
@@ -101,25 +105,33 @@ module Samples
         request = OrdersCreateRequest::new
         request.prefer("return=representation")
         request.request_body(body)
-        response = SampleSkeleton::exec(request)
-        if debug
-          puts "Status Code: #{response.status_code}"
-          puts "Status: #{response.result.status}"
-          puts "Order ID: #{response.result.id}"
-          puts "Intent: #{response.result.intent}"
-          puts "Links:"
-          for link in response.result.links
-            # this could also be called as link.rel or link.href but as method is a reserved keyword for ruby avoid calling link.method
-            puts "\t#{link["rel"]}: #{link["href"]}\tCall Type: #{link["method"]}"
-          end
-          puts "Gross Amount: #{response.result.purchase_units[0].amount.currency_code} #{response.result.purchase_units[0].amount.value}"
+        begin
+            response = PayPalClient::client.execute(request)
+            if debug
+            puts "Status Code: #{response.status_code}"
+            puts "Status: #{response.result.status}"
+            puts "Order ID: #{response.result.id}"
+            puts "Intent: #{response.result.intent}"
+            puts "Links:"
+            for link in response.result.links
+                # this could also be called as link.rel or link.href but as method is a reserved keyword for ruby avoid calling link.method
+                puts "\t#{link["rel"]}: #{link["href"]}\tCall Type: #{link["method"]}"
+            end
+            puts "Gross Amount: #{response.result.purchase_units[0].amount.currency_code} #{response.result.purchase_units[0].amount.value}"
+            end
+            return response
+        rescue BraintreeHttp::HttpError => ioe
+            # Exception occured while processing the refund.
+            puts " Status Code: #{ioe.status_code}"
+            puts " Debug Id: #{ioe.result.debug_id}"
+            puts " Response: #{ioe.result}"
         end
-        return response
       end
     end
   end
 end
 
+# This is the driver function which invokes the createOrder function to create an sample order.
 if __FILE__ == $0
   Samples::CaptureIntentExamples::CreateOrder::new::create_order(true)
 end

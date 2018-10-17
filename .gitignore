@@ -97,6 +97,12 @@ cmake-build-*/
 # IntelliJ
 out/
 
+#Visual Studio Code Files
+.vscode/
+
+#Eclipse Files
+.project
+
 # mpeltonen/sbt-idea plugin
 .idea_modules/
 
