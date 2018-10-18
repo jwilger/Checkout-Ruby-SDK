@@ -39,5 +39,4 @@ end
 if __FILE__ == $0
   id = Samples::AuthorizeIntentExamples::CreateOrder::new::create_order.result.id;
    Samples::GetOrder::new::get_order(id)
-   Samples::GetOrder::new::create_order_with_minimum_body(id)
 end

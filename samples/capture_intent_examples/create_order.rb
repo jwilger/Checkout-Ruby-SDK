@@ -103,7 +103,7 @@ module Samples
         }
 
         request = OrdersCreateRequest::new
-        request.prefer("return=representation")
+        request.headers["prefer"] = "return=representation"
         request.request_body(body)
         begin
             response = PayPalClient::client.execute(request)

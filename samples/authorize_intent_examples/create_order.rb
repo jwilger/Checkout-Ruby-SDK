@@ -106,7 +106,7 @@ module Samples
         }
 
         request = OrdersCreateRequest::new
-        request.prefer("return=representation")
+        request.headers["prefer"] = "return=representation"
         request.request_body(body)  
         begin
             response = PayPalClient::client.execute(request)
@@ -137,6 +137,10 @@ module Samples
       def create_order_with_minimum_body (debug=false)
         body = {
             intent: 'AUTHORIZE',
+            application_context: {
+                return_url: 'https://www.example.com',
+                cancel_url: 'https://www.example.com'
+            },
             purchase_units: [
                 {
                     amount: {
@@ -148,7 +152,7 @@ module Samples
         }
 
         request = OrdersCreateRequest::new
-        request.prefer("return=representation")
+        request.headers["prefer"] = "return=representation"
         request.request_body(body)
         begin
             response = PayPalClient::client.execute(request)
