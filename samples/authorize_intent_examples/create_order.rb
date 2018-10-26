@@ -1,4 +1,5 @@
 require_relative '../paypal_client'
+require 'json'
 include CheckoutSdk::Orders
 
 module Samples
@@ -111,17 +112,18 @@ module Samples
         begin
             response = PayPalClient::client.execute(request)
             if debug
-            puts "Order with the complete required payload"
-            puts "Status Code: #{response.status_code}"
-            puts "Status: #{response.result.status}"
-            puts "Order ID: #{response.result.id}"
-            puts "Intent: #{response.result.intent}"
-            puts "Links:"
-            for link in response.result.links
-                # this could also be called as link.rel or link.href but as method is a reserved keyword for ruby avoid calling link.method
-                puts "\t#{link["rel"]}: #{link["href"]}\tCall Type: #{link["method"]}"
-            end
-            puts "Gross Amount: #{response.result.purchase_units[0].amount.currency_code} #{response.result.purchase_units[0].amount.value}"
+                puts "Order with the complete required payload"
+                puts "Status Code: #{response.status_code}"
+                puts "Status: #{response.result.status}"
+                puts "Order ID: #{response.result.id}"
+                puts "Intent: #{response.result.intent}"
+                puts "Links:"
+                for link in response.result.links
+                    # this could also be called as link.rel or link.href but as method is a reserved keyword for ruby avoid calling link.method
+                    puts "\t#{link["rel"]}: #{link["href"]}\tCall Type: #{link["method"]}"
+                end
+                puts "Gross Amount: #{response.result.purchase_units[0].amount.currency_code} #{response.result.purchase_units[0].amount.value}"
+                puts PayPalClient::openstruct_to_hash(response.result).to_json
             end
             return response
         rescue BraintreeHttp::HttpError => ioe
@@ -157,17 +159,18 @@ module Samples
         begin
             response = PayPalClient::client.execute(request)
             if debug
-            puts "Order with the minimum required payload"
-            puts "Status Code: #{response.status_code}"
-            puts "Status: #{response.result.status}"
-            puts "Order ID: #{response.result.id}"
-            puts "Intent: #{response.result.intent}"
-            puts "Links:"
-            for link in response.result.links
-                # this could also be called as link.rel or link.href but as method is a reserved keyword for ruby avoid calling link.method
-                puts "\t#{link["rel"]}: #{link["href"]}\tCall Type: #{link["method"]}"
-            end
-            puts "Gross Amount: #{response.result.purchase_units[0].amount.currency_code} #{response.result.purchase_units[0].amount.value}"
+                puts "Order with the minimum required payload"
+                puts "Status Code: #{response.status_code}"
+                puts "Status: #{response.result.status}"
+                puts "Order ID: #{response.result.id}"
+                puts "Intent: #{response.result.intent}"
+                puts "Links:"
+                for link in response.result.links
+                    # this could also be called as link.rel or link.href but as method is a reserved keyword for ruby avoid calling link.method
+                    puts "\t#{link["rel"]}: #{link["href"]}\tCall Type: #{link["method"]}"
+                end
+                puts "Gross Amount: #{response.result.purchase_units[0].amount.currency_code} #{response.result.purchase_units[0].amount.value}"
+                puts PayPalClient::openstruct_to_hash(response.result).to_json
             end
             return response
         rescue BraintreeHttp::HttpError => ioe

@@ -38,7 +38,6 @@ end
 puts "Refunding Capture..."
 begin
   refund_response = Samples::RefundCapture::new::refund_capture(capture_resp.result.id)
-  puts refund_response
   puts "Refunded SuccessFully\n"
   puts "Status Code: #{refund_response.status_code}"
   puts "Status: #{refund_response.result.status}"

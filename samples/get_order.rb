@@ -22,6 +22,7 @@ module Samples
           puts "\t#{link["rel"]}: #{link["href"]}\tCall Type: #{link["method"]}"
         end
         puts "Gross Amount: #{response.result.purchase_units[0].amount.currency_code} #{response.result.purchase_units[0].amount.value}"
+        puts PayPalClient::openstruct_to_hash(response.result).to_json
         return response
       rescue BraintreeHttp::HttpError => ioe
         # Exception occured while processing the refund.

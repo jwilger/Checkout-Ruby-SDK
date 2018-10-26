@@ -30,6 +30,7 @@ module Samples
             puts "Buyer:"
             buyer = response.result.payer
             puts "\tEmail Address: #{buyer.email_address}\n\tName: #{buyer.name.full_name}\n\tPhone Number: #{buyer.phone.phone_number.national_number}"
+            puts PayPalClient::openstruct_to_hash(response.result).to_json
           end
           return response
         rescue BraintreeHttp::HttpError => ioe

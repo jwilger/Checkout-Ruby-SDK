@@ -28,7 +28,7 @@ module Samples
                     soft_descriptor: 'HighFashions',
                     amount: {
                         currency_code: 'USD',
-                        value: '230.00',
+                        value: '220.00',
                         breakdown: {
                             item_total: {
                                 currency_code: 'USD',
@@ -36,7 +36,7 @@ module Samples
                             },
                             shipping: {
                                 currency_code: 'USD',
-                                value: '30.00'
+                                value: '20.00'
                             },
                             handling: {
                                 currency_code: 'USD',
@@ -108,16 +108,17 @@ module Samples
         begin
             response = PayPalClient::client.execute(request)
             if debug
-            puts "Status Code: #{response.status_code}"
-            puts "Status: #{response.result.status}"
-            puts "Order ID: #{response.result.id}"
-            puts "Intent: #{response.result.intent}"
-            puts "Links:"
-            for link in response.result.links
-                # this could also be called as link.rel or link.href but as method is a reserved keyword for ruby avoid calling link.method
-                puts "\t#{link["rel"]}: #{link["href"]}\tCall Type: #{link["method"]}"
-            end
-            puts "Gross Amount: #{response.result.purchase_units[0].amount.currency_code} #{response.result.purchase_units[0].amount.value}"
+                puts "Status Code: #{response.status_code}"
+                puts "Status: #{response.result.status}"
+                puts "Order ID: #{response.result.id}"
+                puts "Intent: #{response.result.intent}"
+                puts "Links:"
+                for link in response.result.links
+                    # this could also be called as link.rel or link.href but as method is a reserved keyword for ruby avoid calling link.method
+                    puts "\t#{link["rel"]}: #{link["href"]}\tCall Type: #{link["method"]}"
+                end
+                puts "Gross Amount: #{response.result.purchase_units[0].amount.currency_code} #{response.result.purchase_units[0].amount.value}"
+                puts PayPalClient::openstruct_to_hash(response.result).to_json
             end
             return response
         rescue BraintreeHttp::HttpError => ioe

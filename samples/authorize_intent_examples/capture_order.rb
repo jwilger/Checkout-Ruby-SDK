@@ -23,6 +23,7 @@ module Samples
               # this could also be called as link.rel or link.href but as method is a reserved keyword for ruby avoid calling link.method
               puts "\t#{link["rel"]}: #{link["href"]}\tCall Type: #{link["method"]}"
             end
+            puts PayPalClient::openstruct_to_hash(response.result).to_json
           end
           return response
         rescue BraintreeHttp::HttpError => ioe

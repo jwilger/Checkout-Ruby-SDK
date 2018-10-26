@@ -27,6 +27,7 @@ module Samples
             # this could also be called as link.rel or link.href but as method is a reserved keyword for ruby avoid calling link.method
             puts "\t#{link["rel"]}: #{link["href"]}\tCall Type: #{link["method"]}"
           end
+          puts PayPalClient::openstruct_to_hash(response.result).to_json
         end
         rescue BraintreeHttp::HttpError => ioe
           # Exception occured while processing the refund.
@@ -41,5 +42,5 @@ end
 # This is the driver function which invokes the refund capture function.
 # Capture Id value should be replaced with the capture id.
 if __FILE__ == $0
-  Samples::RefundCapture::new::refund_capture('1NW69966YD492312E', true)
+  Samples::RefundCapture::new::refund_capture('2WB02631FY659550C', true)
 end

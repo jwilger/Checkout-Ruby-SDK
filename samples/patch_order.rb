@@ -37,12 +37,12 @@ if __FILE__ == $0
   begin
     order= Samples::CaptureIntentExamples::CreateOrder::new::create_order.result
     patch_response = Samples::PatchOrder::new::patch_order(order.id)
-    puts "patch_response::: #{patch_response}"
     puts "patch_response status code ::: #{patch_response.status_code}"
     if patch_response.status_code == 204
       order = Samples::GetOrder::new::get_order(order.id)
       puts "Updated Description: #{order.result.purchase_units[0].description}"
       puts "Updated Custom Id: #{order.result.purchase_units[0].custom_id}"
+      puts PayPalClient::openstruct_to_hash(order.result).to_json
     end
   rescue BraintreeHttp::HttpError => ioe
     # Exception occured while processing the refund.
