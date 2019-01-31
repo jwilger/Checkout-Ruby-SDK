@@ -4,7 +4,7 @@ require_relative '../test_harness'
 require_relative '../../lib/lib'
 require 'json'
 
-include CheckoutSdk::Orders
+include PayPalCheckoutSdk::Orders
 
 describe OrdersValidateRequest do
 

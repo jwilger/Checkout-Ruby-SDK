@@ -4,7 +4,7 @@ require_relative '../test_harness'
 require_relative '../../lib/lib'
 require 'json'
 
-include CheckoutSdk::Payments
+include PayPalCheckoutSdk::Payments
 
 describe CapturesRefundRequest do
 

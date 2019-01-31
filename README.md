@@ -27,11 +27,11 @@ require 'paypal-checkout-sdk'
 
 
 # Creating Access Token for Sandbox
-client_id = "AVNCVvV9oQ7qee5O8OW4LSngEeU1dI7lJAGCk91E_bjrXF2LXB2TK2ICXQuGtpcYSqs4mz1BMNQWuso1"
-client_secret = "EDQzd81k-1z2thZw6typSPOTEjxC_QbJh6IithFQuXdRFc7BjVht5rQapPiTaFt5RC-HCa1ir6mi-H5l"
+client_id = "<<PAYPAL-CLIENT-ID>>"
+client_secret = "<<PAYPAL-CLIENT-SECRET>>"
 # Creating an environment
-environment = CheckoutSdk::SandboxEnvironment.new(client_id, client_secret)
-client = CheckoutSdk::PayPalHttpClient.new(self.environment)
+environment = PayPalCheckoutSdk::SandboxEnvironment.new(client_id, client_secret)
+client = PayPalCheckoutSdk::PayPalHttpClient.new(self.environment)
 ```
 
 ## Examples
@@ -43,7 +43,7 @@ client = CheckoutSdk::PayPalHttpClient.new(self.environment)
 
 # Construct a request object and set desired parameters
 # Here, OrdersCreateRequest::new creates a POST request to /v2/checkout/orders
-request = CheckoutSdk::Orders::OrdersCreateRequest::new
+request = PayPalCheckoutSdk::Orders::OrdersCreateRequest::new
 request.request_body({
                         intent: "CAPTURE",
                         purchase_units: [
@@ -90,7 +90,7 @@ After approving order above using `approve` link
 ```ruby
 # Here, OrdersCaptureRequest::new() creates a POST request to /v2/checkout/orders
 # order.id gives the orderId of the order created above
-request = CheckoutSdk::Orders::OrdersCaptureRequest::new(order.id)
+request = PayPalCheckoutSdk::Orders::OrdersCaptureRequest::new(order.id)
 
 begin
     # Call API with your client and get a response for your call

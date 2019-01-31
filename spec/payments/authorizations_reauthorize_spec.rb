@@ -4,7 +4,7 @@ require_relative '../test_harness'
 require_relative '../../lib/lib'
 require 'json'
 
-include CheckoutSdk::Payments
+include PayPalCheckoutSdk::Payments
 
 describe AuthorizationsReauthorizeRequest do
   it 'successfully makes a request', :skip => 'This test is an example, in production, orders require payer approval' do

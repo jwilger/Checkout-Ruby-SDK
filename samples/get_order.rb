@@ -3,7 +3,7 @@ require_relative './authorize_intent_examples/create_order'
 require 'json'
 require 'ostruct'
 
-include CheckoutSdk::Orders
+include PayPalCheckoutSdk::Orders
 module Samples
   class GetOrder
     

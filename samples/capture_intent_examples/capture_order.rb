@@ -1,5 +1,5 @@
 require_relative '../paypal_client' #PayPal SDK dependency
-include CheckoutSdk::Orders
+include PayPalCheckoutSdk::Orders
 module Samples
   module CaptureIntentExamples
     class CaptureOrder

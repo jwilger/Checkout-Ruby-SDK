@@ -1,5 +1,5 @@
 require 'braintreehttp'
-require_relative '../lib/lib'
+require 'paypal-checkout-sdk'
 
 module TestHarness
   class << self

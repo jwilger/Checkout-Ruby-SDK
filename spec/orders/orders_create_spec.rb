@@ -4,7 +4,7 @@ require_relative '../test_harness'
 require_relative './orders_helper'
 require 'json'
 
-include CheckoutSdk::Orders
+include PayPalCheckoutSdk::Orders
 
 describe OrdersCreateRequest do
   it 'successfully makes a request' do
