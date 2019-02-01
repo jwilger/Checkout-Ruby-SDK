@@ -1,4 +1,4 @@
-require 'paypal-checkout-sdk'
+require './lib/paypal-checkout-sdk'
 
 module PayPalClient
   class << self
