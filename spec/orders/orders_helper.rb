@@ -1,6 +1,6 @@
 require_relative '../test_harness'
 
-include CheckoutSdk::Orders
+include PayPalCheckoutSdk::Orders
 
 module OrdersHelper
   class << self

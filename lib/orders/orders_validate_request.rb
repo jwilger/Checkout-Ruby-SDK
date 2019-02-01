@@ -6,7 +6,7 @@
 # DO NOT EDIT
 require 'cgi'
 
-module CheckoutSdk
+module PayPalCheckoutSdk
     module Orders
 
       #

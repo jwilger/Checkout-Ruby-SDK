@@ -2,7 +2,7 @@ require_relative './paypal_client'
 require_relative './capture_intent_examples/create_order'
 require_relative './get_order'
 
-include CheckoutSdk::Orders
+include PayPalCheckoutSdk::Orders
 
 module Samples
   class PatchOrder

@@ -1,4 +1,4 @@
-require_relative '../lib/lib'
+require 'paypal-checkout-sdk'
 
 module PayPalClient
   class << self
@@ -7,8 +7,8 @@ module PayPalClient
     # For demo purpose, we are using SandboxEnvironment. In production this will be
     # LiveEnvironment.
     def environment
-      client_id = ENV['PAYPAL_CLIENT_ID'] || 'AVNCVvV9oQ7qee5O8OW4LSngEeU1dI7lJAGCk91E_bjrXF2LXB2TK2ICXQuGtpcYSqs4mz1BMNQWuso1'
-      client_secret = ENV['PAYPAL_CLIENT_SECRET'] || 'EDQzd81k-1z2thZw6typSPOTEjxC_QbJh6IithFQuXdRFc7BjVht5rQapPiTaFt5RC-HCa1ir6mi-H5l'
+      client_id = ENV['PAYPAL_CLIENT_ID'] || '<<PAYPAL-CLIENT-ID>>'
+      client_secret = ENV['PAYPAL_CLIENT_SECRET'] || '<<PAYPAL-CLIENT-SECRET>>'
       
       PayPal::SandboxEnvironment.new(client_id, client_secret)
     end

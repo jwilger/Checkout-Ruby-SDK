@@ -1,5 +1,5 @@
 require_relative './paypal_client' #PayPal SDK dependency
-include CheckoutSdk::Payments
+include PayPalCheckoutSdk::Payments
 module Samples
     class RefundCapture
       

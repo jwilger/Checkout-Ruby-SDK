@@ -1,5 +1,5 @@
 require_relative '../paypal_client'
-include CheckoutSdk::Payments
+include PayPalCheckoutSdk::Payments
 module Samples
   module AuthorizeIntentExamples
     class CaptureOrder
