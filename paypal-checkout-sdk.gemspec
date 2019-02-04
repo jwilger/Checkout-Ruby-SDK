@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'paypal-checkout-sdk'
-  s.version     = '1.0.0'
-  s.date        = '2018-01-31'
+  s.version     = '1.0.1'
+  s.date        = '2018-02-04'
   s.summary     = "This repository contains PayPal's Ruby SDK for Checkout REST API"
   s.description = "This repository contains PayPal's Ruby SDK for Checkout REST API"
   s.authors     = ["http://developer.paypal.com"]
