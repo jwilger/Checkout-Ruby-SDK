@@ -18,14 +18,14 @@ Get client ID and client secret by going to https://developer.paypal.com/develop
 
 ```ruby
 require 'paypal-checkout-sdk'
-
+  
 
 # Creating Access Token for Sandbox
-client_id = "<<PAYPAL-CLIENT-ID>>"
-client_secret = "<<PAYPAL-CLIENT-SECRET>>"
+client_id = "PAYPAL-CLIENT-ID"
+client_secret = "PAYPAL-CLIENT-SECRET"
 # Creating an environment
-environment = PayPalCheckoutSdk::SandboxEnvironment.new(client_id, client_secret)
-client = PayPalCheckoutSdk::PayPalHttpClient.new(self.environment)
+environment = PayPal::SandboxEnvironment.new(client_id, client_secret)
+client = PayPal::PayPalHttpClient.new(environment)
 ```
 
 ## Examples
@@ -52,8 +52,8 @@ request.request_body({
 
 begin
     # Call API with your client and get a response for your call
-    response = client.execute(request) 
-    
+    response = client.execute(request)
+
     # If call returns body in response, you can get the deserialized version from the result attribute of the response
     order = response.result
     puts order
@@ -84,7 +84,7 @@ After approving order above using `approve` link
 ```ruby
 # Here, OrdersCaptureRequest::new() creates a POST request to /v2/checkout/orders
 # order.id gives the orderId of the order created above
-request = PayPalCheckoutSdk::Orders::OrdersCaptureRequest::new(order.id)
+request = PayPalCheckoutSdk::Orders::OrdersCaptureRequest::new("APPROVED-ORDER-ID")
 
 begin
     # Call API with your client and get a response for your call
