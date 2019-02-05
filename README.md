@@ -126,8 +126,6 @@ $ bundle install
 $ PAYPAL_CLIENT_ID=YOUR_SANDBOX_CLIENT_ID PAYPAL_CLIENT_SECRET=YOUR_SANDBOX_CLIENT_SECRET rspec spec
 ```
 
-*NOTE*: This SDK is still in beta, is subject to change, and should not be used in production.
-
 ## Samples
 
 You can start off by trying out [creating and capturing an order](/samples/capture_intent_examples/run_all.rb)
