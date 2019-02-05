@@ -6,32 +6,31 @@ __Welcome to PayPal Ruby SDK__. This repository contains PayPal's Ruby SDK and s
 
 This is a part of the next major PayPal SDK. It includes a simplified interface to only provide simple model objects and blueprints for HTTP calls. This repo currently contains functionality for PayPal Checkout APIs which includes Orders V2 and Payments V2.
 
-## Please Note
-> **The Payment Card Industry (PCI) Council has [mandated](http://blog.pcisecuritystandards.org/migrating-from-ssl-and-early-tls) that early versions of TLS be retired from service.  All organizations that handle credit card information are required to comply with this standard. As part of this obligation, PayPal is updating its services to require TLS 1.2 for all HTTPS connections. At this time, PayPal will also require HTTP/1.1 for all connections. [Click here](https://github.com/paypal/tls-update) for more information. Connections to the sandbox environment use only TLS 1.2.**
-
-## Direct Credit Card Support
-> **Important: The PayPal REST API no longer supports new direct credit card integrations.**  Please instead consider [Braintree Direct](https://www.braintreepayments.com/products/braintree-direct); which is, PayPal's preferred integration solution for accepting direct credit card payments in your mobile app or website. Braintree, a PayPal service, is the easiest way to accept credit cards, PayPal, and many other payment methods.
-
 ## Prerequisites
 
 - Ruby 2.0.0 or above
 - Bundler
 
 ## Usage
+### Binaries
+
+It is not mandatory to fork this repository for using the PayPal SDK. You can refer [PayPal Checkout Server SDK](https://developer.paypal.com/docs/checkout/reference/server-integration) for configuring and working with SDK without forking this code.
+
+For contirbuting or referrring the samples, You can fork/refer this repository. 
 
 ### Setting up credentials
 Get client ID and client secret by going to https://developer.paypal.com/developer/applications and generating a REST API app. Get <b>Client ID</b> and <b>Secret</b> from there.
 
 ```ruby
 require 'paypal-checkout-sdk'
-
+  
 
 # Creating Access Token for Sandbox
-client_id = "<<PAYPAL-CLIENT-ID>>"
-client_secret = "<<PAYPAL-CLIENT-SECRET>>"
+client_id = "PAYPAL-CLIENT-ID"
+client_secret = "PAYPAL-CLIENT-SECRET"
 # Creating an environment
-environment = PayPalCheckoutSdk::SandboxEnvironment.new(client_id, client_secret)
-client = PayPalCheckoutSdk::PayPalHttpClient.new(self.environment)
+environment = PayPal::SandboxEnvironment.new(client_id, client_secret)
+client = PayPal::PayPalHttpClient.new(environment)
 ```
 
 ## Examples
@@ -58,8 +57,8 @@ request.request_body({
 
 begin
     # Call API with your client and get a response for your call
-    response = client.execute(request) 
-    
+    response = client.execute(request)
+
     # If call returns body in response, you can get the deserialized version from the result attribute of the response
     order = response.result
     puts order
@@ -90,7 +89,7 @@ After approving order above using `approve` link
 ```ruby
 # Here, OrdersCaptureRequest::new() creates a POST request to /v2/checkout/orders
 # order.id gives the orderId of the order created above
-request = PayPalCheckoutSdk::Orders::OrdersCaptureRequest::new(order.id)
+request = PayPalCheckoutSdk::Orders::OrdersCaptureRequest::new("APPROVED-ORDER-ID")
 
 begin
     # Call API with your client and get a response for your call
@@ -124,13 +123,13 @@ Buyer:
 To run integration tests using your client id and secret, clone this repository and run the following command:
 ```sh
 $ bundle install
-$ rspec spec
+$ PAYPAL_CLIENT_ID=YOUR_SANDBOX_CLIENT_ID PAYPAL_CLIENT_SECRET=YOUR_SANDBOX_CLIENT_SECRET rspec spec
 ```
-
-*NOTE*: This SDK is still in beta, is subject to change, and should not be used in production.
 
 ## Samples
 
 You can start off by trying out [creating and capturing an order](/samples/capture_intent_examples/run_all.rb)
 
 To try out different samples for both create and authorize intent check [this link](/samples)
+
+Note: Update the `paypal_client.rb` with your sandbox client credentials or pass your client credentials as environment variable whie executing the samples.
