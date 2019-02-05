@@ -12,6 +12,11 @@ This is a part of the next major PayPal SDK. It includes a simplified interface 
 - Bundler
 
 ## Usage
+### Binaries
+
+It is not mandatory to fork this repository for using the PayPal SDK. You can refer [PayPal Checkout Server SDK](https://developer.paypal.com/docs/checkout/reference/server-integration) for configuring and working with SDK without forking this code.
+
+For contirbuting or referrring the samples, You can fork/refer this repository. 
 
 ### Setting up credentials
 Get client ID and client secret by going to https://developer.paypal.com/developer/applications and generating a REST API app. Get <b>Client ID</b> and <b>Secret</b> from there.
@@ -118,7 +123,7 @@ Buyer:
 To run integration tests using your client id and secret, clone this repository and run the following command:
 ```sh
 $ bundle install
-$ rspec spec
+$ PAYPAL_CLIENT_ID=YOUR_SANDBOX_CLIENT_ID PAYPAL_CLIENT_SECRET=YOUR_SANDBOX_CLIENT_SECRET rspec spec
 ```
 
 *NOTE*: This SDK is still in beta, is subject to change, and should not be used in production.
@@ -128,3 +133,5 @@ $ rspec spec
 You can start off by trying out [creating and capturing an order](/samples/capture_intent_examples/run_all.rb)
 
 To try out different samples for both create and authorize intent check [this link](/samples)
+
+Note: Update the `paypal_client.rb` with your sandbox client credentials or pass your client credentials as environment variable whie executing the samples.
