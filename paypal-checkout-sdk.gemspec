@@ -10,4 +10,9 @@ Gem::Specification.new do |s|
   s.homepage    =
     'https://github.com/paypal/Checkout-Ruby-SDK'
   s.license       = 'MIT'
+
+  s.add_dependency 'braintreehttp', '~> 0.5.0'
+
+  s.add_development_dependency 'rspec'
+  s.add_development_dependency 'webmock'
 end
