@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    paypal-checkout-sdk (1.0.1)
-      braintreehttp (~> 0.5.0)
+    paypal-checkout-sdk (1.0.2)
+      braintreehttp (~> 0.5)
 
 GEM
   remote: https://rubygems.org/
@@ -15,6 +15,7 @@ GEM
     diff-lcs (1.3)
     hashdiff (0.3.7)
     public_suffix (3.0.3)
+    rake (10.5.0)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
       rspec-expectations (~> 3.8.0)
@@ -39,7 +40,8 @@ PLATFORMS
 
 DEPENDENCIES
   paypal-checkout-sdk!
-  rspec
+  rake (~> 10.0)
+  rspec (~> 3.0)
   webmock
 
 BUNDLED WITH

@@ -1,18 +1,27 @@
-Gem::Specification.new do |s|
-  s.name        = 'paypal-checkout-sdk'
-  s.version     = '1.0.1'
-  s.date        = '2018-02-04'
-  s.summary     = "This repository contains PayPal's Ruby SDK for Checkout REST API"
-  s.description = "This repository contains PayPal's Ruby SDK for Checkout REST API"
-  s.authors     = ["http://developer.paypal.com"]
-  s.email       = 'dl-paypal-checkout-api@paypal.com'
-  s.files       = Dir.glob ["lib/**/*.{rb}", "spec/**/*", "*.gemspec"]
-  s.homepage    =
-    'https://github.com/paypal/Checkout-Ruby-SDK'
-  s.license       = 'MIT'
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'core/version'
 
-  s.add_dependency 'braintreehttp', '~> 0.5.0'
+Gem::Specification.new do |spec|
+  spec.name        = 'paypal-checkout-sdk'
+  spec.version     = PayPal::VERSION
+  spec.summary     = "This repository contains PayPal's Ruby SDK for Checkout REST API"
+  spec.description = "This repository contains PayPal's Ruby SDK for Checkout REST API"
+  spec.authors     = ["http://developer.paypal.com"]
+  spec.email       = 'dl-paypal-checkout-api@paypal.com'
+  spec.homepage    = 'https://github.com/paypal/Checkout-Ruby-SDK'
+  spec.license     = 'MIT'
 
-  s.add_development_dependency 'rspec'
-  s.add_development_dependency 'webmock'
+  spec.files = `git ls-files -z`.split("\x0").reject do |f|
+    f.match(%r{^(test|spec|features)/})
+  end
+  spec.bindir        = 'exe'
+  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.require_paths = ['lib']
+
+  spec.add_dependency 'braintreehttp', '~> 0.5'
+
+  spec.add_development_dependency 'rake', '~> 10.0'
+  spec.add_development_dependency 'rspec', '~> 3.0'
+  spec.add_development_dependency 'webmock'
 end
