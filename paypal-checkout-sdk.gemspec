@@ -9,5 +9,5 @@ Gem::Specification.new do |s|
   s.files       = Dir.glob ["lib/**/*.{rb}", "spec/**/*", "*.gemspec"]
   s.homepage    =
     'https://github.com/paypal/Checkout-Ruby-SDK'
-  s.license       = 'MIT'
+  s.license       = 'https://github.com/paypal/Checkout-Ruby-SDK/blob/master/LICENSE'
 end
